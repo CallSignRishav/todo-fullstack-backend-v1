@@ -3,6 +3,6 @@ import fp from "fastify-plugin";
 
 export default fp<FastifyCorsOptions>(async (fastify) => {
   fastify.register(fastifyCors, {
-    origin: "http://localhost:3000/",
+    origin: "*",
   });
 });
