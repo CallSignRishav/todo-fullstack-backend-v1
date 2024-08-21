@@ -20,6 +20,7 @@ const getTodo: FastifyPluginAsyncTypebox = async (
           Type.Object({
             id: Type.String(),
             todoName: Type.String(),
+            isCompleted: Type.Boolean(),
           })
         ),
       },
@@ -27,6 +28,8 @@ const getTodo: FastifyPluginAsyncTypebox = async (
 
     handler: async (request, reply) => {
       const allTodo = await fastify.prisma.todo.findMany();
+
+      console.log(allTodo);
 
       reply.send(allTodo);
     },
