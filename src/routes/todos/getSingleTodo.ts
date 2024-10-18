@@ -3,12 +3,14 @@ import {
   Type,
 } from "@fastify/type-provider-typebox";
 
-const deleteTodo: FastifyPluginAsyncTypebox = async (
+/**  @type {import('fastify').FastifyPluginAsync} */
+
+const getSingleTodo: FastifyPluginAsyncTypebox = async (
   fastify,
   opts
 ): Promise<void> => {
   fastify.route({
-    method: "DELETE",
+    method: "GET",
 
     url: "/:id",
 
@@ -26,15 +28,15 @@ const deleteTodo: FastifyPluginAsyncTypebox = async (
     },
 
     handler: async (request, reply) => {
-      const todoId = await request.params;
+      const todoId = request.params;
 
-      const delTodo = await fastify.prisma.todo.delete({
+      const myTodo = await fastify.prisma.todo.findUniqueOrThrow({
         where: todoId,
       });
 
-      reply.send(delTodo);
+      reply.send({ id: myTodo?.id, todoName: myTodo?.todoName });
     },
   });
 };
 
-export default deleteTodo;
+export default getSingleTodo;
