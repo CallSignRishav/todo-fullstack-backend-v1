@@ -32,7 +32,7 @@
     "concurrently": "8.2.2",
     "fastify-tsconfig": "2.0.0",
     "prisma": "^5.18.0",
-    "ts-node": "10.4.0",
+    "ts-node": "10.9.2",
     "typescript": "5.2.2"
   }
 }
